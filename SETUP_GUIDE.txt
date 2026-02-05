@@ -1,0 +1,222 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║                  CRAVELLA E-COMMERCE SETUP GUIDE                  ║
+║                                                                   ║
+║            Complete MERN Stack Application                        ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+📋 PREREQUISITES
+────────────────
+✓ Node.js v18+ installed
+✓ MongoDB v6+ installed and running
+✓ npm or yarn package manager
+
+🚀 QUICK START (5 STEPS)
+────────────────────────
+1. Extract this ZIP file
+
+2. Install MongoDB (if not installed):
+   Ubuntu/Debian:
+   $ curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
+     sudo gpg --dearmor -o /usr/share/keyrings/mongodb-archive-keyring.gpg
+   $ echo "deb [ signed-by=/usr/share/keyrings/mongodb-archive-keyring.gpg ] \
+     https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | \
+     sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+   $ sudo apt-get update && sudo apt-get install -y mongodb-org
+   $ sudo systemctl start mongod
+   $ sudo systemctl enable mongod
+
+   macOS:
+   $ brew tap mongodb/brew
+   $ brew install mongodb-community
+   $ brew services start mongodb-community
+
+3. Setup Backend:
+   $ cd backend
+   $ npm install
+   $ npm run seed        # Seeds 30 products + test user
+   $ npm run dev         # Starts o
+   n http://localhost:5000
+
+4. Setup Frontend (NEW TERMINAL):
+   $ cd frontend
+   $ npm install
+   $ npm run dev         # Starts on http://localhost:5173
+
+5. Open Browser:
+   Navigate to: http://localhost:5173
+
+🔐 TEST CREDENTIALS
+───────────────────
+Email: test@cravella.com
+Password: password123
+
+📁 PROJECT STRUCTURE
+────────────────────
+cravella-ecommerce/
+├── backend/
+│   ├── config/          # Database config
+│   ├── models/          # MongoDB schemas
+│   ├── controllers/     # Business logic
+│   ├── routes/          # API routes
+│   ├── middleware/      # Auth middleware
+│   ├── seed/            # Database seeding
+│   ├── .env             # Environment variables
+│   └── server.js        # Express server
+│
+└── frontend/
+    ├── src/
+    │   ├── components/  # Reusable components
+    │   ├── pages/       # Page components
+    │   ├── store/       # Redux store
+    │   ├── utils/       # Helper functions
+    │   └── App.jsx      # Main app
+    └── package.json
+
+✨ FEATURES IMPLEMENTED
+───────────────────────
+✓ User authentication (JWT with HTTP-only cookies)
+✓ Product catalog with variants
+✓ Shopping cart with live updates
+✓ Cart drawer (slides from right)
+✓ Wishlist functionality
+✓ Product search & filtering
+✓ Category-based navigation
+✓ Responsive design (mobile/tablet/desktop)
+✓ Order management
+✓ Checkout process
+✓ Protected routes
+✓ Toast notifications
+
+🎯 EXACT BEHAVIORS MATCHED
+──────────────────────────
+✓ Variant change → price + image swap
+✓ Add to cart → opens drawer
+✓ Cart qty change → live total update
+✓ Wishlist heart toggle → instant UI reflect
+✓ Login required for checkout
+✓ Cart persists after refresh
+✓ Product page slug routing
+✓ Filter & search query params
+✓ Loading skeletons
+
+📊 SEEDED DATA
+──────────────
+- 30 products across 5 categories:
+  • Cakes (6 products)
+  • Pastries (5 products)
+  • Desserts (7 products)
+  • Beverages (5 products)
+  • Snacks (7 products)
+
+- Each product has 2-5 variants
+- Variants support: size, flavor, weight, type
+- Price range: ₹40 - ₹2000
+- Stock levels included
+- Related products configured
+
+🔧 TROUBLESHOOTING
+──────────────────
+Problem: MongoDB connection error
+Solution: 
+  $ sudo systemctl status mongod
+  $ sudo systemctl start mongod
+
+Problem: Port already in use
+Solution: 
+  Backend: Change PORT in backend/.env
+  Frontend: Change port in frontend/vite.config.js
+
+Problem: CORS errors
+Solution: Ensure FRONTEND_URL in backend/.env matches your frontend URL
+
+Problem: Cart not persisting
+Solution: 
+  - Clear browser cookies
+  - Verify MongoDB is running
+  - Check JWT_SECRET is set in backend/.env
+
+📡 API ENDPOINTS
+────────────────
+Auth:
+POST   /api/auth/signup
+POST   /api/auth/login
+POST   /api/auth/logout
+GET    /api/auth/me
+
+Products:
+GET    /api/products
+GET    /api/products/:slug
+GET    /api/products/category/:category
+
+Cart (Protected):
+GET    /api/cart
+POST   /api/cart/add
+PATCH  /api/cart/update
+DELETE /api/cart/remove
+
+Wishlist (Protected):
+GET    /api/wishlist
+POST   /api/wishlist/toggle
+
+Orders (Protected):
+POST   /api/orders
+GET    /api/orders
+GET    /api/orders/:id
+
+🎨 TECH STACK
+─────────────
+Backend:
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT authentication
+- bcrypt for passwords
+
+Frontend:
+- React 18 + Vite
+- Redux Toolkit
+- React Router v6
+- Tailwind CSS
+- Axios
+- React Toastify
+
+📝 ENVIRONMENT VARIABLES
+────────────────────────
+Backend (.env already configured):
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/cravella
+JWT_SECRET=cravella_secret_key_change_in_production_2024
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
+
+⚡ NEXT STEPS
+─────────────
+1. Run the application
+2. Test with demo account or create new account
+3. Browse products
+4. Add items to cart
+5. Test checkout flow
+6. View orders
+
+🛠️ CUSTOMIZATION
+─────────────────
+To add more products:
+  - Edit backend/seed/seedData.js
+  - Run: npm run seed
+
+To change colors:
+  - Edit frontend/tailwind.config.js
+
+To add new features:
+  - Backend: Add routes in backend/routes/
+  - Frontend: Add pages in frontend/src/pages/
+
+📞 SUPPORT
+──────────
+For issues, refer to README.md or check:
+- MongoDB logs: /var/log/mongodb/mongod.log
+- Backend console output
+- Frontend console (browser DevTools)
+
+═══════════════════════════════════════════════════════════════════
+                    Happy Building! 🎉
+═══════════════════════════════════════════════════════════════════
