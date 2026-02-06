@@ -27,7 +27,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: 'https://cravella-git-main-nishanthucodes-projects.vercel.app',
+  origin: 'https://craveeeee.netlify.app',
   credentials: true
 }));
 app.use(express.json());
