@@ -70,9 +70,19 @@ export const getProductBySlug = async (req, res) => {
       });
     }
 
+    // Fetch related products from same category
+    const relatedProducts = await Product.find({
+      category: product.category,
+      _id: { $ne: product._id }
+    }).limit(5);
+
+    // Add related products to response
+    const productWithRelated = product.toObject();
+    productWithRelated.relatedProducts = relatedProducts;
+
     res.json({
       success: true,
-      product
+      product: productWithRelated
     });
   } catch (error) {
     res.status(500).json({
